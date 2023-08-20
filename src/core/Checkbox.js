@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const Checkbox = ({ categories }) => {
+const Checkbox = ({ categories, handleFilters }) => {
     const [checked, setCheked] = useState([]);
 
     const handleToggle = c => () => {
         // return the first index or -1
         const currentCategoryId = checked.indexOf(c);
-        console.log('before',currentCategoryId)
-        console.log(checked)
         const newCheckedCategoryId = [...checked];
         // if currently checked was not already in checked state > push
         // else pull/take off
@@ -16,8 +14,9 @@ const Checkbox = ({ categories }) => {
         } else {
             newCheckedCategoryId.splice(currentCategoryId, 1);
         }
-        console.log(newCheckedCategoryId);
+        // console.log(newCheckedCategoryId);
         setCheked(newCheckedCategoryId);
+        handleFilters(newCheckedCategoryId);
     };
 
     return categories.map((c, i) => (
